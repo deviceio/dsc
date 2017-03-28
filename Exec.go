@@ -50,6 +50,34 @@ func (t *Exec) Apply() (bool, error) {
 	return true, nil
 }
 
+func (t *Exec) Refresh() error {
+	return nil
+}
+
+func (t *Exec) Requires() []string {
+	if t.Relation == nil || t.Relation.Require == nil {
+		return []string{}
+	}
+
+	return t.Relation.Require
+}
+
+func (t *Exec) Notifies() []string {
+	if t.Relation == nil || t.Relation.Notify == nil {
+		return []string{}
+	}
+
+	return t.Relation.Notify
+}
+
+func (t *Exec) Refreshes() []string {
+	if t.Relation == nil || t.Relation.Refresh == nil {
+		return []string{}
+	}
+
+	return t.Relation.Refresh
+}
+
 func (t *Exec) args() ([]string, error) {
 	if t.ArgsFunc != nil {
 		return t.ArgsFunc(t)
